@@ -4,15 +4,19 @@ import (
 	"bufio"
 	"fmt"
 	"net/http"
-	"strconv"
 )
 
 //GetToServer sends http request to server
-func GetToServer() {
-	PORT := 3000
-	URL := "http://localhost"
-	fmt.Println("Sending request to server on URL:",URL," on PORT: ",PORT)
-	resp, err := http.Get(URL+":"+strconv.Itoa(PORT))
+func GetToServer(URL string, PORT string) {
+	if PORT == "" {
+		PORT = "3000"
+	}
+	if URL == "" {
+		URL = "http://localhost"
+	}
+
+	fmt.Println("Sending request to server on URL:", URL, " on PORT: ", PORT)
+	resp, err := http.Get("http://" + URL + ":" + PORT)
 	if err != nil {
 		panic(err)
 	}
